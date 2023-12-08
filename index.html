@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html ng-app="userApp">
+
+<head>
+    <title>HELIVERSE ASSIGNMENT</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.6/ui-bootstrap-tpls.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        
+    </style>
+</head>
+
+<body ng-controller="UserController">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label for="searchName">Search by Name:</label>
+                    <input type="text" class="form-control" ng-model="searchName" id="searchName"
+                        placeholder="Enter name">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <div class="form-group">
+                    <label for="domainFilter">Filter by Domain:</label>
+                    <select class="form-control" ng-model="domainFilter">
+                        <option value="">All</option>
+                        <option value="Sales">Sales</option>
+                        <option value="Finance">Finance</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="IT">IT</option>
+                        <option value="Management">Management</option>
+                        <option value="UI Designing">UI Designing</option>
+                        <option value="Business Development">Business Development</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <div class="form-group">
+                    <label for="filterGender">Filter by Gender:</label>
+                    <select class="form-control" ng-model="filterGender">
+                        <option value="">All</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <div class="form-group">
+                    <label for="filterAvailability">Filter by Availability:</label>
+                    <select class="form-control" ng-model="filterAvailability">
+                        <option value="">All</option>
+                        <option value="true">Available</option>
+                        <option value="false">Not Available</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <button class="btn btn-primary" ng-click="searchUser()">Search</button>
+                <button class="btn btn-success" ng-click="createTeam()">Create Team</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div ng-repeat="user in displayedUsers" class="col-xs-12 col-sm-6 col-md-3 user-card">
+                <img ng-src="{{user.avatar}}" alt="{{user.first_name}}" class="avatar" width="50" height="50">
+                <h3>{{user.first_name}} {{user.last_name}}</h3>
+                <p>Email: {{user.email}}</p>
+                <p>Gender: {{user.gender}}</p>
+                <p>Domain: {{user.domain}}</p>
+                <p ng-if="user.available">Available</p>
+                <p ng-if="!user.available">Not Available</p>
+            </div>
+        </div>
+
+        <div class="pagination-container">
+            <button class="btn btn-default" ng-click="prevPage()" ng-disabled="currentPage === 1">Previous</button>
+            Page {{currentPage}} of {{numPages}}
+            <button class="btn btn-default" ng-click="nextPage()" ng-disabled="currentPage === numPages">Next</button>
+        </div>
+
+        <div ng-if="teamMembers.length > 0" class="col-xs-12">
+            <h2>Team Members</h2>
+            <div ng-repeat="teamMember in teamMembers" class="user-card">
+                <img ng-src="{{teamMember.avatar}}" alt="{{teamMember.first_name}}" class="avatar" width="50"
+                    height="50">
+                <h3>{{teamMember.first_name}} {{teamMember.last_name}}</h3>
+                <p>Email: {{teamMember.email}}</p>
+                <p>Gender: {{teamMember.gender}}</p>
+                <p>Domain: {{teamMember.domain}}</p>
+                <p ng-if="teamMember.available">Available</p>
+                <p ng-if="!teamMember.available">Not Available</p>
+            </div>
+        </div>
+
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>

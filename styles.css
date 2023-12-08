@@ -1,0 +1,15 @@
+.user-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.pagination-container {
+  margin-top: 20px;
+  text-align: center;
+}
